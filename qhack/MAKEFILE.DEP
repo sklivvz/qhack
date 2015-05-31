@@ -1,0 +1,15 @@
+dungeon.o: dungeon.c qhack.h config.h dungeon.h sysdep.h error.h \
+ game.h misc.h monster.h player.h
+error.o: error.c error.h
+game.o: game.c qhack.h config.h dungeon.h sysdep.h error.h game.h \
+ misc.h monster.h player.h
+misc.o: misc.c qhack.h config.h dungeon.h sysdep.h error.h game.h \
+ misc.h monster.h player.h
+monster.o: monster.c qhack.h config.h dungeon.h sysdep.h error.h \
+ game.h misc.h monster.h player.h
+player.o: player.c qhack.h config.h dungeon.h sysdep.h error.h game.h \
+ misc.h monster.h player.h
+qhack.o: qhack.c qhack.h config.h dungeon.h sysdep.h error.h game.h \
+ misc.h monster.h player.h
+sysdep.o: sysdep.c qhack.h config.h dungeon.h sysdep.h error.h game.h \
+ misc.h monster.h player.h

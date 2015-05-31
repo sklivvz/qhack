@@ -1,0 +1,218 @@
+
+		  -----====<<<<< QHack 0.1 >>>>>====-----
+
+	      (The Quickest Roguelike Gaming Hack on the Net)
+
+
+             (C) Copyright 1996, 1997, 1998 by Thomas Biskup.
+			   All Rights Reserved.
+
+
+
+INTRODUCTION
+
+What's QHack you might ask?  Right now it's the attempt to write a new
+roguelike game, although the idea is not really to have a new game but to
+have the well-documented sources for a simple roguelike game so that new
+programers can try to understand how such a game works.  To understand why
+I would engage in such a thing I need to introduce myself: my name is
+Thomas Biskup and I'm the author of the rather well-known roguelike game
+'ADOM' (shortcut for 'Ancient Domains Of Mystery'; see
+                          http://www.adom.de
+for details about the game).  I receive a lot of email concerning ADOM and
+also have been asked a couple of time for help concerning the techniques
+required to write such a game.  I'm for sure no expert (although writing
+ADOM gave me some insights ;-) and thus decided to make available the
+sources for a very simple roguelike game.  QHack (short for Quick Hack) is
+the result of this.  I'm also using this new game as a testing platform for
+some concepts that might be included in ADOM, as a means to pass some time
+programming when I'm to tired to work on ADOM and too unwilling to work on
+my mini-SGML compiler.
+
+The second aspect of writing QHack was the attempt to see how long it would
+take to create a game from scratch.  The file 'qhack.c' contains my woking
+schedule for QHack.
+
+
+
+THE DESIGN CONCEPTS BEHIND QHACK
+
+QHack was designed to be simple (both gameplay-wise and programming-wise).
+Therefor all the data structures used in the game are kept in arrays
+(because they allow very simple access to the data) and the dungeon layout
+is pretty limited.  Nonetheless this should everyone give something to
+start off and understand the basics.  If you want to write a complex
+roguelike game (like ADOM, Nethack or Angband) you for sure need to be a
+very committed person with some programming skills and a *lot* of free time
+on your hands and you also need to start from scratch.
+
+QHack is meant to be simple and therefor is reduced to the basic concepts.
+It has a story (see below) but basically is a dungeon crawl requiring some
+tactics and some luck.
+
+The dungeon is designed to have 25 levels.  Each level is divided into a
+number of sections.  Each section in turn is able to contain a room and
+some connecting tunnels or a tunnel intersection.  Some basic tiles are
+used to describe the level.
+
+
+
+THE STORY
+
+Every game needs a story and QHack is no exception.  Since it's a game
+based on Fantasy Roleplaying it uses a fantasy background:
+
+  The wise king Gandor ruled the kingdom of Kalderon for many years.  His
+  subjects were happy and prosperous people.  Then some days suddenly the
+  evil mage Zhark appears and steals the soul of the king imprisoning it in
+  a mythical gem -- the Soul Gem.  Zhark flees to his home dungeon -- a
+  deep cave filled with traps and monsters.  Princess Azhara, the only
+  daughter of noble king Gandor, issues a call for help and heroes from
+  many lands respond.  You are one of those heroes.  Equipped with your
+  basic inheritances you venture into the dungeons to slay Zhark and
+  retrieve the Soul Gem.
+
+That's it.  Now go and have fun... although you first might want to read
+the following paragraphs.
+
+
+
+THE PLAYER CHARACTER
+
+The player character is described by a number of letters.  Five basic
+attributes govern his or her inborn abilities and some skills are derived
+from them.  The basic attributes are Strength (physical prowess),
+Intelligence (mental prowess), Dexterity (grace and agility), Toughness
+(health, constitution and resistance) and Mana (magical talent).
+Attributes are rated on a scale of 1+ with 7 being mediocre, 10 being
+average, 15 being exceptional and 18+ being a heroic level attribute.
+
+Additionally each character has hitpoints and power points.  If the
+hitpoints points drop to 0 the character dies.  If the power points drop to
+0 the character is no longer able to use magic.  These points regenerate as
+time goes by.
+
+
+
+COMMANDS
+
+QHack is controlled by a number of keyboard commands. To move you can press
+the following letters (yes, you only can move north, south, west ad east):
+
+               i
+               |
+             j-.-l
+               |
+               k
+
+If you hold down the SHIFT key while pressing one of those letters your
+character will run into the direction implied by the key until something
+special is encountered.
+
+Additionally the following commands are available:
+
+	> - Descend a level.
+	< - Ascend a level.
+	o - Open doors.
+	R - Redraw the screen.
+	T - Adjust the training levels and see skill levels.
+
+	Q - Quit the game.
+
+
+
+TRAINING
+
+Your character advances in skills by earning experience points.  These
+points are primarily gained by slaying monsters although you also receive
+minor rewards for exploring unknown areas, etc.
+
+You are able to set training concentrations (like this, screenshot
+follows):
+
+    ->        Strength: 0 of 840 [10]: 11
+          Intelligence: 0 of 720 [10]: 11
+             Dexterity: 0 of 900 [10]: 14
+             Toughness: 0 of 660 [10]: 10
+                  Mana: 0 of 440 [10]: 10
+             Hitpoints: 0 of  20 [10]: 19
+         Magical Power: 0 of  14 [10]: 13
+          To-Hit Bonus: 0 of   5 [10]: 0
+       To-Damage Bonus: 0 of  25 [10]: 0
+             Searching: 0 of  14 [10]: 13
+
+The first number is the amount of experience points collected for that
+category, the next number is the amount of experience points required
+to advance the trait in question by +1, the number in square brackets
+is the percentage of your collected experience points that will be
+spent on the specific trait and the last number is the current trait
+score.
+
+
+
+THE CURRENT STATE OF QHACK
+
+QHack is far away from being a complete (or even playable) game.  Some
+things already work, but mostly the game needs further development.
+Currently you can start the game, a map is created, some monsters are put
+on the map and you can walk around.  You can also switch between levels and
+earn a couple of experience points.
+
+Otherwise QHack is pretty incomplete.  The monsters don't move and they
+even aren't recognized.  You can't fight, there are no items, you can't
+load or save games, etc.  I'll continue to work on QHack as my time
+permits.  Feel free to use it as the base for your own game (although you
+should abide to the license included in each source file).
+
+Also I haven't made any efforts to write QHack in the most efficient way.
+My main concern was to make it portable and get it to work (and on my
+Pertium 90 it's pretty fast ;-).
+
+
+
+COMPILING QHACK
+
+QHack should compile under Linux and DOS (at least with the DJGPP
+distribution).  If you port it to another system and&or compiler please
+contact me at 'rpg@saranxis.ruhr.de'.  I might be interested in including
+your changes into the main source tree to make QHack available on as many
+systems as possible.
+
+
+
+THE SOURCE FILES
+
+The following source files are included in the QHack distribution:
+
+Makefile     - The Makefile used to compile the game; adjust as you like.
+makefile.dep - The dependencies for the source files.
+
+config.h     - The global configuration variables.
+dungeon.c    - Dungeon generation and display code for the dungeon.
+dungeon.h    - Global dungeon declarations.
+error.c      - Code for handling fatal erros.
+error.h      - Global error function definitions.
+game.c       - The code for the main loop; code for walking, ...
+game.h       - Game specific declarations.
+misc.c       - Some miscellaneous functions used in various places.
+misc.h       - Declarations for those functions.
+monster.c    - The complete code for creating and handling monsters.
+monster.h    - Global monster declaration stuff.
+player.c     - The code for handling all the player data.
+player.h     - Global player data definitions.
+qhack.c      - The startup code for the game plus my work schedule.
+qhack.h      - The most essential data structures for the dungeon. 
+sysdep.c     - All the system-dependent code plus some derived stuff.
+sysdep.h     - Declarations for that stuff.
+
+Each file is commented in some detail.  I might elaborate even more so that
+understanding everything gets simpler for newbies.  Nonetheless I believe
+that you probably won't be able to successfully write a complete roguelike
+game if you are not able to understand the rather simple sources for QHack.
+If you have something to say about the quality of my comments I'm open for
+criticism (although I'll make fun of flames :-] ).
+
+One final comment: IMHO it's not a good programming practice to have one
+global include file for all declarations.  Nonetheless QHack uses this
+approach to make my life simple.
+

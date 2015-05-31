@@ -1,0 +1,60 @@
+##############################################################################
+#
+# The Linux-GCC/DOS-GJPP Makefile
+#
+##############################################################################
+
+#
+# Object files.
+#
+
+OBJ = qhack.o dungeon.o sysdep.o error.o game.o misc.o monster.o player.o
+
+#
+# Compiler stuff -- adjust to your system.
+#
+
+# Linux
+
+CC     = gcc
+LFLAGS = -g -o qhack -lncurses
+CFLAGS = -g -Wall -pedantic
+
+# DOS
+
+#CC = gcc
+#LFLAGS = -o qhack
+#CFLAGS = -Wall -O2
+
+#
+# Targets.
+#
+
+qhack: $(OBJ) 
+	gcc $(OBJ) $(LFLAGS)
+
+depend:
+	@-rm makefile.dep
+	@echo Creating dependencies.
+	@for i in *.c; do $(CC) $(INC) -MM $$i; done > makefile.dep
+	@echo Done.
+
+clean:
+	rm *.o qhack
+
+count:
+	wc *.c *.h Makefile
+
+#
+# Dependencies.
+#
+
+include makefile.dep
+
+#
+# The default rule.
+#
+
+.c.o:
+	gcc $(CFLAGS) -c $<
+
